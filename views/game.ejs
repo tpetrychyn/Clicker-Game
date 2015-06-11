@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+      <title>Runescape Auto Miner</title>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+      <link rel="stylesheet" href="./stylesheet/style.css">
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script src="./javascript/game.js"></script>
+      <style>
+          body        { padding-top:80px; word-wrap:break-word; }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <strong>Welcome to Runescape Auto Miner</strong>: <%= user.local.email %><br>
+      <h2 onclick="mute()">Mute</h2>
+      <% include clickerUpgrades %>
+      <% include clickArea %>
+    </div>
+  </body>
+</html>

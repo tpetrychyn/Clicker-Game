@@ -1,0 +1,4 @@
+<% for (x in clickerUpgrades) {%>
+<span id=<%=clickerUpgrades[x].id%> onclick="doBuyPickaxe(<%=clickerUpgrades[x].id%>)">
+<%=  clickerUpgrades[x].name %> - Cost: <%=  clickerUpgrades[x].cost %><br></span>
+<%}%><br>
