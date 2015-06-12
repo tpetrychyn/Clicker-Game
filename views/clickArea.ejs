@@ -1,10 +1,5 @@
 <div class="row">
-  <div id="rockslist"><% for (x in rockTypes) {%>
-    <span id="rock_<%=rockTypes[x].id%>" onclick="chooseRock(<%=rockTypes[x].id%>)">
-    <img class="rockicons" height="50px" src="./images/rocks/<%=rockTypes[x].id%>.png"/><br>
-    <%=  rockTypes[x].name %><br></span>
-    <%}%>
-  </div>
+    <% include listRocks %>
 </div>
 <div class="row">
   <div class="col-md-4" id="pickarea"><img width="200px" src="./images/picks/<%=pickTypes[0].id%>.png"/></div>

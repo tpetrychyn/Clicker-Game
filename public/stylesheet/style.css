@@ -21,6 +21,10 @@
   width: 400px;
 }
 
+.rocksLocked {
+    opacity: 0.5;
+}
+
 #pickarea {
   width: 200px;
   float: left;
