@@ -1,15 +1,15 @@
 <div id="rockslist">
-<%var i=0;
-  for (x=0;x<=user.stats.rocksUnlocked;x++) {%>
-      <span id="rock_<%=rockTypes[x].id%>" onclick="chooseRock(<%=rockTypes[x].id%>)" onmousemove="showRockTooltip(event, '<%=rockTypes[x].description%>')" onmouseover="toggleRockTooltip('show')" onmouseout="toggleRockTooltip('hide')">
-          <img class="rockicons" height="50px" src="./images/rocks/<%=rockTypes[x].id%>.png"/><br>
-          <%=  rockTypes[x].name %><br>
-      </span>
-  <%i=x;}
-    for (i=i+1;i<rockTypes.length;i++) {%>
+    <%for (i=0;i<rockTypes.length;i++) {
+        if (user.stats.level>=rockTypes[i].required) {%>
+            <span id="rock_<%=rockTypes[i].id%>" onclick="chooseRock(<%=rockTypes[i].id%>)" onmousemove="showRockTooltip(event, '<%=rockTypes[i].description%>')" onmouseover="toggleRockTooltip('show')" onmouseout="toggleRockTooltip('hide')">
+                <img class="rockicons" height="50px" src="./images/rocks/<%=rockTypes[i].id%>.png"/><br>
+                <%=  rockTypes[i].name %><br>
+            </span>
+        <%} else {%>
         <span class="rocksLocked" id="rock_<%=rockTypes[i].id%>" onclick="chooseRock(<%=rockTypes[i].id%>)" onmousemove="showRockTooltip(event, '<%=rockTypes[i].description%>')" onmouseover="toggleRockTooltip('show')" onmouseout="toggleRockTooltip('hide')">
             <img class="rockiconslocked" height="50px" src="./images/rocks/<%=rockTypes[i].id%>.png"/><br>
             <%=  rockTypes[i].name %><br>
         </span>
-    <%}%>
+    <%}
+    }%>
 </div>

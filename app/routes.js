@@ -101,6 +101,10 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/info', function(req, res) {
+        res.render('info.ejs');
+    });
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -209,7 +213,7 @@ module.exports = function(app, passport) {
                  req.user.save(function(err) {
                      if (err)
                          throw err;
-                     res.send(req.param('id') + ' ' + user.stats.exp + ' ' + user.stats.level);
+                     res.send(req.param('id') + ' ' + user.stats.exp + ' ' + user.stats.afkCount);
                  });
           }, miningTime * 1000);
       } else {

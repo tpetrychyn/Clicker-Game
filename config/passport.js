@@ -67,11 +67,12 @@ module.exports = function(passport) {
                 newUser.stats.gold = 0;
                 newUser.stats.maxGold = 0;
                 newUser.stats.level = 1;
-                newUser.stats.rocksUnlocked = 1;
+                newUser.stats.rocksUnlocked = 0;
                 newUser.stats.exp = 0;
                 newUser.stats.pickaxes = [0];
                 newUser.stats.pickEquipped = 0;
                 newUser.stats.inventory = [];
+                newUser.stats.afkCount = 0;
 
                 // save the user
                 newUser.save(function(err) {

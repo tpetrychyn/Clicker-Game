@@ -8,6 +8,7 @@ var isMining = false;
 var muted = false;
 var currPick = 0;
 var shopWindowOpen = false;
+var afkCount = 0;
 
 function doClick() {
   if (firstLoad) {
@@ -20,6 +21,10 @@ function doClick() {
   }
    if (!isMining) {
      isMining = true;
+     if (currRock == 12 || currRock == 7 || currRock == 9 || currRock == 4) {
+         afkCount = (Math.random() * 10) + 6;
+         document.getElementById('rock_' + currRock).style.background = "#99CCFF";
+     }
      mineRock(currRock);
    }
 }
@@ -95,7 +100,7 @@ function mineRock(id) {
   $.ajax({ //Send a get request to the server with which pickaxe to buy
      type: "GET",
      url: "./game/mineRock",
-     data: "id=" + id + "&pick=" + currPick + "&level=" + level, //send the id of the rock as a param //add pickaxe as another param
+     data: "id=" + id + "&pick=" + currPick + "&level=" + level + "&afkcount=" + afkCount, //send the id of the rock as a param //add pickaxe as another param
      success: function(data) {
          if (data == "notunlocked") {
              stopMining();
@@ -118,6 +123,13 @@ function mineRock(id) {
                        document.getElementById('shopWindow').innerHTML = data;
                    }
                  });
+                 if (afkCount > 0) {
+                     afkCount--;
+                     mineRock(id);
+                     isMining = true;
+                 } else {
+                     document.getElementById('rock_' + currRock).style.background = "white";
+                 }
             }
           });
         }
@@ -168,6 +180,8 @@ function choosePick(id) {
 }
 
 function chooseRock(id) {
+  afkCount = 0;
+  document.getElementById('rock_' + currRock).style.background = "white";
   if (isMining) {
     return;
   }
