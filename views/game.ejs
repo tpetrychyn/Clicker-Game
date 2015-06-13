@@ -15,7 +15,7 @@
   <body>
     <div id="wrapper">
       <strong>Welcome to Runescape Auto Miner</strong>: <%= user.local.email %><br>
-      <h2 onclick="mute()">Mute</h2>
+      <h2 onclick="mute()">Mute</h2> <h2 onclick="openShop()">Shop</h2>
       <div class="row">
         <div class="col-md-5">
           <% include pickaxes %>
@@ -27,6 +27,7 @@
           </div>
         </div>
       </div>
+      <% include shopView %>
     </div>
   </body>
 </html>
