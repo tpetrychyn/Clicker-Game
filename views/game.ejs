@@ -10,20 +10,23 @@
       <script src="./javascript/game.js"></script>
   </head>
   <body>
+    <div id="rockTooltip">
+    </div>
     <div id="wrapper">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <h2 onclick="mute()">Mute</h2>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <h2 onclick="toggleShop()">Shop</h2>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <h2><a href="/highscores">Highscores</a></h2>
         </div>
+        <div class="col-md-2">
+          <h2><a href="/logout">Logout</a></h2>
+        </div>
       </div>
-      <strong>Welcome to Runescape Miner</strong>: <%= user.local.email %><br>
-
       <div class="row">
         <div class="col-md-5">
           <% include clickArea %>
@@ -37,6 +40,14 @@
       <div id="shopWindow">
         <% include shopView %>
       </div>
+      <div id="footer" class="row">
+        <div class="col-md-6" style="text-align: center;">
+          <h5>Created by /u/Shockz13</h5>
+        </div>
+      </div>
     </div>
+    <audio id="mining_sound_effect" src="./sounds/mining.ogg" preload="auto"></audio>
+    <audio id="mining_finished" src="./sounds/finishedmining.ogg" preload="auto"></audio>
+    <audio id="levelup_sound_effect" src="./sounds/levelup.ogg" preload="auto"></audio>
   </body>
 </html>

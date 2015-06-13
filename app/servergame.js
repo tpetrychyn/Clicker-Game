@@ -1,10 +1,14 @@
 rockTypes = [
-    //id, name, cost, exp, description, required
-    new rockType(0, "Copper", 30, 35, "Requires level 1 to mine", 1, 2),
-    new rockType(1, "Tin", 30, 35, "Requires level 1 to mine", 2, 2),
-    new rockType(2, "Iron", 55, 70, "Requires level 15 to mine", 15, 3),
-    new rockType(3, "Coal", 80, 100, "Requires level 30 to mine", 30, 5),
-    new rockType(4, "Gold", 100, 100, "Requires level 40 to mine", 40, 5)
+    //id, name, cost, exp, description, required, baseTime
+    new rockType(0, "Copper", 24, 35, "Requires level 1 to mine (24gp)", 1, 2),
+    new rockType(1, "Tin", 24, 35, "Requires level 1 to mine (24gp)", 1, 2),
+    new rockType(2, "Iron", 50, 70, "Requires level 15 to mine (70gp)", 15, 3),
+    new rockType(3, "Silver", 90, 80, "Requires level 20 to mine (90gp)", 20, 5),
+    new rockType(4, "Coal", 100, 100, "Requires level 30 to mine (100gp)", 30, 8),
+    new rockType(5, "Gold", 180, 130, "Requires level 40 to mine (180gp)", 40, 12),
+    new rockType(6, "Mithril", 190, 160, "Requires level 55 to mine (190gp)", 55, 20),
+    new rockType(7, "Adamantite", 480, 190, "Requires level 70 to mine (480gp)", 70, 35),
+    new rockType(8, "Runite", 3840, 250, "Requires level 85 to mine (3840gp)", 85, 45)
   ];
 
 //allows nodeJS to access it
@@ -25,7 +29,10 @@ pickTypes = [
     new pickType(0, "Bronze", 1, 1, "Requires level 1 to wear"),
     new pickType(1, "Iron", 100, 1, "Requires level 1 to wear"),
     new pickType(2, "Steel", 500, 5, "Requires level 5 to wear"),
-    new pickType(3, "Mithril", 2100, 20, "Requires level 20 to wear")
+    new pickType(3, "Mithril", 2100, 21, "Requires level 21 to wear"),
+    new pickType(4, "Adamantite", 3200, 31, "Requires level 31 to wear"),
+    new pickType(5, "Runite", 32000, 31, "Requires level 41 to wear"),
+    new pickType(6, "Dragon", 15871478, 31, "Requires level 61 to wear")
   ];
 
 //allows nodeJS to access it

@@ -16,7 +16,7 @@
     <span class="lockedpick" id="pick_<%=pickTypes[x].id%>" onclick="doBuyPickaxe(<%=pickTypes[x].id%>)">
       <img class="pickicons" height="100px" src="./images/picks/<%=pickTypes[x].id%>.png"/><br>
       <%=pickTypes[x].name%><br>
-    Cost: <%=  pickTypes[x].cost %><br></span>
+    Cost:<%=pickTypes[x].cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %><br></span>
   <%}
   isOwned = 0;
 }%>

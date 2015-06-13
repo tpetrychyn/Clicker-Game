@@ -1,7 +1,26 @@
 #wrapper {
   padding-left: 300px;
+  background-color: white;
+  padding-left: 200px;
 }
 
+body {
+  cursor: pointer;
+  background-color: grey;
+}
+
+#rockTooltip {
+  position: absolute;
+  width: 400px;
+  z-index: 1000;
+  display: none;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+}
 
 .rockicons:hover {
   -moz-transform:scale(1.2);
@@ -19,6 +38,8 @@
   float: left;
   height: 400px;
   width: 400px;
+  margin-left: 150px;
+  position: absolute;
 }
 
 .rocksLocked {
@@ -30,11 +51,12 @@
   float: left;
   display: block;
   visibility: hidden;
+  position:absolute;
 }
 
 [id^="pick_"] {
   float: left;
-  padding-right: 10px;
+  padding-right: 2px;
   text-align:center;
   color: black;
 }
@@ -111,8 +133,8 @@
 #shopWindow {
   display: none;
   background-image: url('../images/shop_back.png');
-  width: 586px;
-  height: 360px;
+  width: 600px;
+  height: 368px;
   background-size: cover;
   z-index: 100;
   position: relative;
@@ -128,7 +150,7 @@
   display: block;
   height: 30px;
   width: 30px;
-  margin-left: 540px;
+  margin-left: 555px;
   position: absolute;
   top: 5px;
 }

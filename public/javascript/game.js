@@ -27,6 +27,7 @@ function doClick() {
 function mute() {
   if (!muted) {
     document.getElementById('mining_sound_effect').pause();
+    document.getElementById('levelup_sound_effect').pause();
     muted = true;
   } else {
     muted = false;
@@ -46,6 +47,9 @@ function checkLevelUp() {
     level = document.getElementById('hiddenLevel').value;
     expRequired = expForLevel(parseInt(level)+1);
     if (exp >= expRequired) {
+      if (!muted) {
+        document.getElementById('levelup_sound_effect').play();
+      }
       $.ajax({ //Send a get request to the server with which pickaxe to buy
          type: "GET",
          url: "./game/levelup",
@@ -63,6 +67,7 @@ function checkLevelUp() {
                    url: "./game/listrocks",
                    success: function(data) {
                        document.getElementById('rockslist').innerHTML = data;
+
                    }
                  });
              }
@@ -225,4 +230,21 @@ function toggleShop() {
     document.getElementById('shopWindow').style.display = "none";
     shopWindowOpen = false;
   }
+}
+
+function toggleRockTooltip(which) {
+  var div = document.getElementById('rockTooltip');
+  if (which=="show") {
+    div.style.display = "block";
+  } else if (which=="hide") {
+    div.style.display = "none";
+  }
+}
+
+function showRockTooltip(e, description) {
+  var x = e.pageX;
+  var y = e.pageY;
+  document.getElementById('rockTooltip').innerHTML = description;
+  document.getElementById("rockTooltip").style.left = x + 5;
+  document.getElementById("rockTooltip").style.top = y - 50;
 }
