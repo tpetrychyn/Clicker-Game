@@ -253,9 +253,10 @@ module.exports = function(app, passport) {
             user.stats.exp = 0;
             user.stats.gold = 0;
             user.stats.maxGold = 0;
+            user.stats.rocksUnlocked = 0;
         }
         //Recalculate proper level based on exp
-        var a = 0;
+        /*var a = 0;
         var lev = 2;
         while(a<=user.stats.exp) {
             a=0;
@@ -265,7 +266,7 @@ module.exports = function(app, passport) {
             lev++;
         }
         lev-=2;
-        user.stats.level = lev;
+        user.stats.level = lev;*/
         req.user.save(function(err) {
               if (err)
                   throw err;
