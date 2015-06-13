@@ -1,5 +1,4 @@
-<% for (i=0;i<user.stats.inventory.length-1;i++) {%>
-    <span><%=user.stats.inventory%></span>
+<% for (i=0;i<user.stats.inventory.length;i++) {%>
     <span id="invent_<%=rockTypes[user.stats.inventory[i]].id%>" onclick="">
     <img class="oreicons" height="50px" src="./images/ores/<%=rockTypes[user.stats.inventory[i]].id%>.png"/></span>
   <%}%>
