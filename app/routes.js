@@ -80,6 +80,13 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/game/shopView', isLoggedIn, function(req, res) {
+        res.render('shopView.ejs', {
+            user : req.user,
+            layout: false
+        });
+    });
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -144,6 +151,25 @@ module.exports = function(app, passport) {
       } else {
         res.send('notunlocked');
       }
+    });
+
+    app.get('/game/sellOre', isLoggedIn, function(req, res, next) {
+      var user = req.user;
+      var id = req.param('id');
+      var count = 0;
+      for (i=user.stats.inventory.length;i>=0;i--) {
+        if (user.stats.inventory[i]==id) {
+          count++;
+          user.stats.inventory.splice(i,1);
+        }
+      }
+        user.stats.gold += count*game.rockTypes[id].cost;
+        //user.stats.maxGold += count*game.rockTypes.cost;
+      req.user.save(function(err) {
+          if (err)
+              throw err;
+          res.send(user.stats.gold + ' ');
+      });
     });
 
     app.get('/game/mineRock', isLoggedIn, function(req, res, next) {

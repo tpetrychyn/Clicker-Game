@@ -7,6 +7,7 @@ var exp = 0;
 var isMining = false;
 var muted = false;
 var currPick = 0;
+var shopWindowOpen = false;
 
 function doClick() {
   if (firstLoad) {
@@ -95,9 +96,6 @@ function mineRock(id) {
              stopMining();
          } else {
          newData = data.split(" ");
-         gold += (newData[0] + 1) * 5;
-         $('#hiddenGold').val(gold);
-         $('#gold').html(gold);//INVENTORY WOULD GO HERE INSTEAD OF gold
          $('#hiddenExp').val(newData[1]);
          $('#exp').html(newData[1]);
          currRock = id;
@@ -108,6 +106,13 @@ function mineRock(id) {
             url: "./game/listInventory",
             success: function(data) {
                 document.getElementById('inventory').innerHTML = data;
+                $.ajax({ //Send a get request to the server with which pickaxe to buy
+                   type: "GET",
+                   url: "./game/shopView",
+                   success: function(data) {
+                       document.getElementById('shopWindow').innerHTML = data;
+                   }
+                 });
             }
           });
         }
@@ -174,6 +179,45 @@ function chooseRock(id) {
         }
      }
    });
+}
+
+function sellOre(id) {
+
+  $.ajax({ //Send a get request to the server with which pickaxe to buy
+     type: "GET",
+     url: "./game/sellOre",
+     data: "id=" + id, //send the id of the pickaxe as a param
+     success: function(data) {
+          if (data) {
+             $.ajax({ //Send a get request to the server with which pickaxe to buy
+               type: "GET",
+               url: "./game/listInventory",
+               success: function(data) {
+                   document.getElementById('inventory').innerHTML = data;
+                   $.ajax({ //Send a get request to the server with which pickaxe to buy
+                      type: "GET",
+                      url: "./game/shopView",
+                      success: function(data) {
+                          document.getElementById('shopWindow').innerHTML = data;
+                      }
+                    });
+               }
+             });
+             $('#gold').html(data); //update the visual gold
+             $('#hiddenGold').val(data); //update the hidden gold
+           }
+     }
+   });
+}
+
+function toggleShop() {
+  if (!shopWindowOpen) {
+    document.getElementById('shopWindow').style.display = "block";
+    shopWindowOpen = true;
+  } else {
+    document.getElementById('shopWindow').style.display = "none";
+    shopWindowOpen = false;
+  }
 }
 
 function doUpdate() {

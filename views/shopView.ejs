@@ -1,27 +1,31 @@
-<div id="shopWindow">
-  <% include pickaxes %>
-
-  <% var shopArray = [[0,0]];
-  var test;
-  for (x=0;x<user.stats.inventory.length;x++) {
-    var found = false;
-      for (i=0;i<shopArray.length;i++) {
-        if (user.stats.inventory[x] == shopArray[i][0]) {
-          shopArray[i][1] += 1;
-          found = true;
-        }
+<span id="shopTitle">Nurmof's Pickaxe Shop</span><span id="closeButton" onclick="toggleShop()"></span>
+<div id="row" style="height:180px">
+  <div class="col-md-12">
+    <% include pickaxes %>
+  </div>
+</div>
+<div id="row">
+<% var shopArray = [[0,0]];
+var test;
+for (x=0;x<user.stats.inventory.length;x++) {
+  var found = false;
+    for (i=0;i<shopArray.length;i++) {
+      if (user.stats.inventory[x] == shopArray[i][0]) {
+        shopArray[i][1] += 1;
+        found = true;
       }
-      if (!found) {
-        shopArray.push([]);
-        shopArray[i][0] = user.stats.inventory[x];
-        shopArray[i][1] = 1;
-      }
-      found = false;
     }
-    for (x in shopArray) {
-      if (shopArray[x][1] > 0) {%>
-        <span id="sell_<%=rockTypes[shopArray[x][0]].id%>" onclick="">
-        <img class="sellicons" height="50px" src="./images/ores/<%=rockTypes[shopArray[x][0]].id%>.png"/><span id="shopAmount"><%=shopArray[x][1]%></span></span>
-    <%}
-    }%>
+    if (!found) {
+      shopArray.push([]);
+      shopArray[i][0] = user.stats.inventory[x];
+      shopArray[i][1] = 1;
+    }
+    found = false;
+  }
+  for (x in shopArray) {
+    if (shopArray[x][1] > 0) {%>
+      <span id="sell_<%=rockTypes[shopArray[x][0]].id%>" onclick="sellOre(<%=shopArray[x][0]%>)">
+      <img class="sellicons" height="100px" src="./images/ores/<%=rockTypes[shopArray[x][0]].id%>.png"/><br><span id="shopAmount"><%=shopArray[x][1]%></span></span>
+  <%}
+  }%>
 </div>

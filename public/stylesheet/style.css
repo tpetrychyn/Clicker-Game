@@ -34,6 +34,8 @@
 [id^="pick_"] {
   float: left;
   padding-right: 10px;
+  text-align:center;
+  color: black;
 }
 
 #pickaxes {
@@ -69,6 +71,51 @@
   float: left;
   padding-right: 10px;
   padding-bottom: 5px;
+}
+
+/*shop stuff begins here*/
+#shopWindow {
+  display: none;
+  background-image: url('../images/shop_back.png');
+  width: 586px;
+  height: 360px;
+  background-size: cover;
+  z-index: 100;
+  position: relative;
+  top: -600px;
+  left: 100px;
+  padding-top: 45px;
+  padding-left: 10px;
+}
+
+#closeButton {
+  background-image: url('../images/close_button.png');
+  background-size: cover;
+  display: block;
+  height: 30px;
+  width: 30px;
+  margin-left: 540px;
+  position: absolute;
+  top: 5px;
+}
+
+[id^="sell_"] {
+  float: left;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+#shopAmount {
+  color: yellow;
+  font-size: 16pt;
+}
+
+#shopTitle {
+  margin-left: 40px;
+  position: absolute;
+  top: 8px;
+  font-size: 18pt;
+  color: yellow;
 }
 
 @-ms-keyframes wiggle{0%{-ms-transform:rotate(20deg);}50%{-ms-transform:rotate(-6deg);}100%{-ms-transform:rotate(6deg);}}
