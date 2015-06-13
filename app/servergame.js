@@ -16,7 +16,7 @@ function clickUpgrade(id, name, cost, description, unlocked, owned, classId, con
 }
 
 rockTypes = [
-    //id, name, cost, exp, description, required, baseTime
+    //id, name, cost, exp, description, required
     new rockType(0, "Copper", 30, 35, "Requires level 1 to mine", 1, 2),
     new rockType(1, "Tin", 30, 35, "Requires level 1 to mine", 2, 2),
     new rockType(2, "Iron", 55, 70, "Requires level 15 to mine", 15, 3),

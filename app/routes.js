@@ -94,6 +94,7 @@ module.exports = function(app, passport) {
         user.stats.pickaxes.push(id);
         user.stats.pickaxes.sort();
       }
+      console.log(user.stats.gold);
       req.user.save(function(err) {
           if (err)
               throw err;
