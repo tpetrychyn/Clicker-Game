@@ -58,14 +58,47 @@
    transform:scale(1.2);
 }
 
+/*inventory shit here*/
 #inventory {
   clear: both;
   width: 340px;
-  height: 528px;
-  background-image: url("../images/inventory_back.png");
+  height: 570px;
+  background-image: url("../images/inventory_back_test.png");
   background-size: cover;
   padding-left: 50px;
   padding-top: 60px;
+  position: relative;
+}
+
+#gold {
+  margin-top: 410px;
+  margin-left: 60px;
+  font-size: 16pt;
+  color: yellow;
+  position: absolute;
+  display: block;
+}
+
+#level {
+  margin-top: 410px;
+  margin-left: 210px;
+  font-size: 16pt;
+  color: yellow;
+  position: absolute;
+  display: block;
+}
+
+#exp {
+  margin-top: 380px;
+  margin-left: 220px;
+  font-size: 16pt;
+  color: black;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  position: absolute;
+  display: none;
 }
 
 [id^="invent_"] {

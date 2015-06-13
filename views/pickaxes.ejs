@@ -10,7 +10,7 @@
     <span id="pick_<%=pickTypes[x].id%>" onclick="choosePick(<%=pickTypes[x].id%>)">
       <img class="pickicons" height="100px" src="./images/picks/<%=pickTypes[x].id%>.png"/><br>
       <%=pickTypes[x].name%><br>
-      Owned<br>
+      <p style="color:yellow">Owned</p><br>
       </span>
   <%} else {%>
     <span class="lockedpick" id="pick_<%=pickTypes[x].id%>" onclick="doBuyPickaxe(<%=pickTypes[x].id%>)">

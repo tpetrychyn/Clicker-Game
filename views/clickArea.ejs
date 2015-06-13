@@ -3,20 +3,7 @@
 </div>
 <div class="row">
   <div class="col-md-4" id="pickarea"><img id="pickpicture" width="200px" src="./images/picks/<%=pickTypes[user.stats.pickaxes[user.stats.pickaxes.length-1]].id%>.png"/></div>
-  <div class="col-md-4" id="rockarea" name="clickrock" onClick="doClick()">
+  <div style="padding-top:50px" class="col-md-4" id="rockarea" name="clickrock" onClick="doClick()">
     <img id="rockpicture" width="300px" src="images/rocks/<%=user.stats.rocksUnlocked%>.png"/>
   </div>
-</div>
-<div class="row">
-  <input type="hidden" id="hiddenGold" value=<%=user.stats.gold%>>
-  <input type="hidden" id="hiddenRock" value=<%=user.stats.rocksUnlocked%>>
-  <input type="hidden" id="hiddenLevel" value=<%=user.stats.level%>>
-  <input type="hidden" id="hiddenExp" value=<%=user.stats.exp%>>
-  <input type="hidden" id="hiddenPick" value=<%=user.stats.pickaxes[user.stats.pickaxes.length-1]%>>
-  <audio id="mining_sound_effect" src="./sounds/mining.ogg" preload="auto"></audio>
-  <audio id="mining_finished" src="./sounds/finishedmining.ogg" preload="auto"></audio>
-  Money: <span id="gold"><%= user.stats.gold %></span><br>
-  Level: <span id="level"><%= user.stats.level %></span><br>
-  Experience: <span id="exp"><%= user.stats.exp %></span><br>
-  <span id="info" onload="loadValues()"></span>
 </div>

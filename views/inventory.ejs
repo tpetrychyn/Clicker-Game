@@ -2,3 +2,17 @@
     <span id="invent_<%=rockTypes[user.stats.inventory[i]].id%>" onclick="">
     <img class="oreicons" height="50px" src="./images/ores/<%=rockTypes[user.stats.inventory[i]].id%>.png"/></span>
   <%}%>
+
+  <div id="stats">
+    <input type="hidden" id="hiddenGold" value=<%=user.stats.gold%>>
+    <input type="hidden" id="hiddenRock" value=<%=user.stats.rocksUnlocked%>>
+    <input type="hidden" id="hiddenLevel" value=<%=user.stats.level%>>
+    <input type="hidden" id="hiddenExp" value=<%=user.stats.exp%>>
+    <input type="hidden" id="hiddenPick" value=<%=user.stats.pickaxes[user.stats.pickaxes.length-1]%>>
+    <audio id="mining_sound_effect" src="./sounds/mining.ogg" preload="auto"></audio>
+    <audio id="mining_finished" src="./sounds/finishedmining.ogg" preload="auto"></audio>
+    <span id="gold"><%= user.stats.gold.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></span>
+    <span id="level" onmouseover="showExp()" onmouseout="hideExp()"><%= user.stats.level %></span>
+    <span id="exp">Experience:<%= user.stats.exp %></span>
+    <span id="info" onload="loadValues()"></span>
+  </div>

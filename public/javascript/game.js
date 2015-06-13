@@ -130,9 +130,9 @@ function doBuyPickaxe(id) {
      data: "id=" + id, //send the id of the pickaxe as a param
      success: function(data) {
            // data is ur summary
-          $('#gold').html(data); //update the visual gold
+          $('#gold').html(data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //update the visual gold
           $('#hiddenGold').val(data); //update the hidden gold
-          gold = parseInt(document.getElementById('hiddenGold').value);
+          gold = data;
           $.ajax({ //Send a get request to the server with which pickaxe to buy
              type: "GET",
              url: "./game/listpicks",
@@ -143,7 +143,6 @@ function doBuyPickaxe(id) {
            choosePick(id);
      }
    });
-  //doUpdate();
 }
 
 function choosePick(id) {
@@ -203,11 +202,19 @@ function sellOre(id) {
                     });
                }
              });
-             $('#gold').html(data); //update the visual gold
              $('#hiddenGold').val(data); //update the hidden gold
+             $('#gold').html(data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //update the visual gold
            }
      }
    });
+}
+
+function showExp() {
+  document.getElementById('exp').style.display = "block";
+}
+
+function hideExp() {
+  document.getElementById('exp').style.display = "none";
 }
 
 function toggleShop() {
@@ -218,9 +225,4 @@ function toggleShop() {
     document.getElementById('shopWindow').style.display = "none";
     shopWindowOpen = false;
   }
-}
-
-function doUpdate() {
-  document.getElementById('hiddenGold').value = gold;
-  document.getElementById("gold").innerHTML = gold;
 }
