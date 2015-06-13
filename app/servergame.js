@@ -32,7 +32,7 @@ pickTypes = [
     new pickType(3, "Mithril", 2100, 21, "Requires level 21 to wear"),
     new pickType(4, "Adamantite", 3200, 31, "Requires level 31 to wear"),
     new pickType(5, "Runite", 32000, 31, "Requires level 41 to wear"),
-    new pickType(6, "Dragon", 15871478, 31, "Requires level 61 to wear")
+    new pickType(6, "Dragon", 1071478, 31, "Requires level 61 to wear")
   ];
 
 //allows nodeJS to access it
