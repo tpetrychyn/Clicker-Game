@@ -88,7 +88,7 @@ function stopMining() {
 function mineRock(id) {
     document.getElementById('pickarea').style.visibility = 'visible';
     if (!muted) {
-      document.getElementById('mining_sound_effect').currentTime = 0;
+    //  document.getElementById('mining_sound_effect').currentTime = 0;
       document.getElementById('mining_sound_effect').loop = true;
       document.getElementById('mining_sound_effect').play();
     }
