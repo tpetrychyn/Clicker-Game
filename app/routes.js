@@ -38,7 +38,7 @@ module.exports = function(app, passport) {
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/game', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
@@ -48,11 +48,11 @@ module.exports = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
+  /*  app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
         });
-    });
+    });*/
 
     app.get('/game', isLoggedIn, function(req, res) {
         res.render('game.ejs', {
@@ -185,7 +185,7 @@ module.exports = function(app, passport) {
           if (miningTime < 1)
             miningTime = (Math.random() * 2) + 1;
           setTimeout(function() {
-              user.stats.exp += game.rockTypes[id].exp + 1000;
+              user.stats.exp += game.rockTypes[id].exp;
               if (user.stats.inventory.length < 28) { //Only 28 spaces in inventory
                 user.stats.inventory.push(id);
               }
