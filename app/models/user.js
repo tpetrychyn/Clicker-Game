@@ -17,7 +17,8 @@ var userSchema = mongoose.Schema({
         exp          : Number,
         rocksUnlocked: Number,
         pickaxes     : Array,
-        pickEquipped : Number
+        pickEquipped : Number,
+        inventory    : Array
     }
 });
 

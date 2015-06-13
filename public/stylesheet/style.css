@@ -5,6 +5,8 @@
    transform:scale(1.2);
 }
 
+
+
 [id^="rock_"] {
   float: left;
   padding-right: 10px;
@@ -49,6 +51,22 @@
    -webkit-transform:scale(1.2);
    -o-transform:scale(1.2);
    transform:scale(1.2);
+}
+
+#inventory {
+  clear: both;
+  width: 340px;
+  height: 500px;
+  background-image: url("../images/inventory_back.png");
+  background-size: cover;
+  padding-left: 50px;
+  padding-top: 60px;
+}
+
+[id^="invent_"] {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 5px;
 }
 
 @-ms-keyframes wiggle{0%{-ms-transform:rotate(20deg);}50%{-ms-transform:rotate(-6deg);}100%{-ms-transform:rotate(6deg);}}

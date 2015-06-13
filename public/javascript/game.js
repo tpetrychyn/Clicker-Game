@@ -103,6 +103,13 @@ function mineRock(id) {
          currRock = id;
          stopMining();
          checkLevelUp();
+         $.ajax({ //Send a get request to the server with which pickaxe to buy
+            type: "GET",
+            url: "./game/listInventory",
+            success: function(data) {
+                document.getElementById('inventory').innerHTML = data;
+            }
+          });
         }
       }
    });

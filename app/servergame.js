@@ -1,20 +1,3 @@
-clickerUpgrades = [
-    //name, cost, owned, description, unlocked
-    new clickUpgrade(0, "Fedora", 25, "Your snazzy fedora makes your clicks twice as effective"),
-    new clickUpgrade(1, "Morning Soda", 100, "Sneak a soda in the morning and click twice as fast"),
-    new clickUpgrade(2, "Fedora x2", 200, "You put on another fedora making you the coolest camper (+2 autism per click)")
-  ];
-
-//allows nodeJS to access it
-exports.clickerUpgrades = clickerUpgrades;
-
-function clickUpgrade(id, name, cost, description, unlocked, owned, classId, content) {
-  this.id = id;
-  this.name = name;
-  this.cost = cost;
-  this.description = description;
-}
-
 rockTypes = [
     //id, name, cost, exp, description, required
     new rockType(0, "Copper", 30, 35, "Requires level 1 to mine", 1, 2),

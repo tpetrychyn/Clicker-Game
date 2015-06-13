@@ -71,6 +71,7 @@ module.exports = function(passport) {
                 newUser.stats.exp = 0;
                 newUser.stats.pickaxes = [0];
                 newUser.stats.pickEquipped = 0;
+                newUser.stats.inventory = [0];
 
                 // save the user
                 newUser.save(function(err) {

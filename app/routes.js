@@ -73,6 +73,13 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/game/listInventory', isLoggedIn, function(req, res) {
+        res.render('inventory.ejs', {
+            user : req.user,
+            layout: false
+        });
+    });
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -152,6 +159,9 @@ module.exports = function(app, passport) {
             miningTime = (Math.random() * 2) + 1;
           setTimeout(function() {
               user.stats.exp += game.rockTypes[id].exp + 1000;
+              if (user.stats.inventory.length < 28) { //Only 28 spaces in inventory
+                user.stats.inventory.push(id);
+              }
               user.stats.gold += game.rockTypes[id].cost;
                  req.user.save(function(err) {
                      if (err)
