@@ -13,13 +13,19 @@
       </style>
   </head>
   <body>
-    <div class="container">
+    <div id="wrapper">
       <strong>Welcome to Runescape Auto Miner</strong>: <%= user.local.email %><br>
       <h2 onclick="mute()">Mute</h2>
-      <% include pickaxes %>
-      <% include clickArea %>
-      <div id="inventory">
-      <% include inventory %>
+      <div class="row">
+        <div class="col-md-5">
+          <% include pickaxes %>
+          <% include clickArea %>
+        </div>
+        <div class="col-md-4">
+          <div id="inventory">
+            <% include inventory %>
+          </div>
+        </div>
       </div>
     </div>
   </body>
