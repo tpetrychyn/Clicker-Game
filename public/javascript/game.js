@@ -102,7 +102,7 @@ function mineRock(id) {
          } else {
          newData = data.split(" ");
          $('#hiddenExp').val(newData[1]);
-         $('#exp').html(newData[1]);
+         $('#exp').html('Experience:' + ' ' + newData[1]);
          currRock = id;
          stopMining();
          checkLevelUp();

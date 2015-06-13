@@ -179,11 +179,15 @@ module.exports = function(app, passport) {
       var id = req.param('id');
       var pick = req.param('pick');
       var level = req.param('level');
-      var levelFactor = (10-(0.1*level));
+      var levelFactor = (10-(0.2*(level-rockTypes[id].required)));
+      if (levelFactor < 1)
+        levelFactor = 1;
+      console.log(levelFactor);
       if (rockTypes[id].required <= user.stats.level && user.stats.level == level && user.stats.pickaxes.indexOf(pick) >= 0) {
-          var miningTime = rockTypes[id].mineTime + (Math.random() * levelFactor) - parseInt(pick+1);
+          var miningTime = rockTypes[id].mineTime + (Math.random() * levelFactor) - (parseInt(pick)+1);
+          console.log(miningTime);
           if (miningTime < 1)
-            miningTime = (Math.random() * 2) + 1;
+            miningTime = (Math.random() * 3) + 1;
           setTimeout(function() {
               user.stats.exp += game.rockTypes[id].exp;
               if (user.stats.inventory.length < 28) { //Only 28 spaces in inventory
