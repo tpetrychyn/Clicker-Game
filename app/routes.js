@@ -54,6 +54,19 @@ module.exports = function(app, passport) {
         });
     });*/
 
+    /*app.get('/game', function(req, res) {
+            var user;
+            User.findOne({'local.email': '1'}, function(err, item) {
+                if (err || !item)
+                    res.send('error');
+                console.log('found' + item);
+                user = item;
+                res.render('game.ejs', {
+                    user: user
+                });
+            });
+    });*/
+
     app.get('/game', isLoggedIn, function(req, res) {
         res.render('game.ejs', {
             user : req.user
@@ -196,7 +209,7 @@ module.exports = function(app, passport) {
                  req.user.save(function(err) {
                      if (err)
                          throw err;
-                     res.send(req.param('id') + ' ' + user.stats.exp);
+                     res.send(req.param('id') + ' ' + user.stats.exp + ' ' + user.stats.level);
                  });
           }, miningTime * 1000);
       } else {
@@ -212,17 +225,43 @@ module.exports = function(app, passport) {
         return a;
     }
 
+    function expForLevel(theLevel) {
+        var a = 0;
+        for (x=1;x<theLevel;x++) {
+            a += Math.floor((x + 300 * Math.pow(2, (x/7.)))/4);
+        }
+        return a;
+    }
+
     app.get('/game/levelup', isLoggedIn, function(req, res, next) {
       var user = req.user;
       var id = req.param('id');
       var level = user.stats.level;
-      if (user.stats.exp >= user.stats.level+1) {
+      var required = expForLevel(parseInt(user.stats.level)+1);
+      if (user.stats.exp >= required) {
         user.stats.level++;
         for (i in game.rockTypes) {
             if (user.stats.level == game.rockTypes[i].required) {
                 user.stats.rocksUnlocked = i;
             }
         }
+        if (user.local.email == "guest" && user.stats.level > 2) {
+            user.stats.exp = 0;
+            user.stats.gold = 0;
+            user.stats.maxGold = 0;
+        }
+        //Recalculate proper level based on exp
+        var a = 0;
+        var lev = 2;
+        while(a<=user.stats.exp) {
+            a=0;
+            for (x=1;x<lev;x++) {
+                a += Math.floor((x + 300 * Math.pow(2, (x/7.)))/4);
+            }
+            lev++;
+        }
+        lev-=2;
+        user.stats.level = lev;
         req.user.save(function(err) {
               if (err)
                   throw err;
@@ -242,9 +281,9 @@ module.exports = function(app, passport) {
         res.redirect('/highscores/1?sortType=1');
       var rank = req.params.page;
         if (req.params.page > 1)
-          var rank = ((req.params.page-1)*10) + 1;
+          var rank = ((req.params.page-1)*20) + 1;
       if (req.param('sortType')==1) {
-        User.find().sort({'stats.exp': -1}).limit(10).skip(rank-1).exec(function(err, users) {
+        User.find().sort({'stats.exp': -1}).limit(20).skip(rank-1).exec(function(err, users) {
           if (users.length==0)
             res.redirect('/highscores/1?sortType=1');
           res.render('highscores.ejs', {
@@ -255,7 +294,7 @@ module.exports = function(app, passport) {
           });
         });
       } else if (req.param('sortType')==2) {
-        User.find().sort({'stats.maxGold': -1}).limit(10).skip(rank-1).exec(function(err, users) {
+        User.find().sort({'stats.maxGold': -1}).limit(20).skip(rank-1).exec(function(err, users) {
           if (users.length==0)
             res.redirect('/highscores/1?sortType=1');
           res.render('highscores.ejs', {

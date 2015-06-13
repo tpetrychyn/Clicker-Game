@@ -2,7 +2,7 @@ rockTypes = [
     //id, name, cost, exp, description, required, baseTime
     new rockType(0, "Copper", 24, 35, "Requires level 1 to mine (24gp)", 1, 2),
     new rockType(1, "Tin", 24, 35, "Requires level 1 to mine (24gp)", 1, 2),
-    new rockType(2, "Iron", 50, 70, "Requires level 15 to mine (70gp)", 15, 3),
+    new rockType(2, "Iron", 50, 70, "Requires level 15 to mine (50gp)", 15, 3),
     new rockType(3, "Silver", 90, 80, "Requires level 20 to mine (90gp)", 20, 5),
     new rockType(4, "Coal", 100, 100, "Requires level 30 to mine (100gp)", 30, 8),
     new rockType(5, "Gold", 180, 130, "Requires level 40 to mine (180gp)", 40, 10),

@@ -9,16 +9,22 @@
         body        { padding-top:80px; }
     </style>
 </head>
-<body>
+<body style="background-image: url('./images/loginback.png'); background-size: cover;">
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Clicker Miner Login</h1>
+        <h1>Runescape Clicker Miner v1</h1>
+        <form action="/login" method="post">
+            <input type="hidden" class="form-control" name="email" value="guest">
+            <input type="hidden" class="form-control" name="password" value="guest">
+            <button type="submit" class="btn btn-warning btn-lg">Play as Guest</button>
+            <hr>
+        </form>
 
         <p>Login or Register:</p>
 
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Signup</a>
+        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Create an Account</a>
     </div>
 
 </div>
