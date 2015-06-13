@@ -1,6 +1,7 @@
 // app/routes.js
 module.exports = function(app, passport) {
   var game = require('./servergame.js')
+  var User = require('../app/models/user');
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -164,7 +165,7 @@ module.exports = function(app, passport) {
         }
       }
         user.stats.gold += count*game.rockTypes[id].cost;
-        //user.stats.maxGold += count*game.rockTypes.cost;
+        user.stats.maxGold += count*game.rockTypes[id].cost;
       req.user.save(function(err) {
           if (err)
               throw err;
@@ -188,7 +189,6 @@ module.exports = function(app, passport) {
               if (user.stats.inventory.length < 28) { //Only 28 spaces in inventory
                 user.stats.inventory.push(id);
               }
-              user.stats.gold += game.rockTypes[id].cost;
                  req.user.save(function(err) {
                      if (err)
                          throw err;
@@ -226,6 +226,43 @@ module.exports = function(app, passport) {
           });
       } else {
         res.send('notunlocked');
+      }
+    });
+
+    app.get('/highscores', function(req, res) {
+      res.redirect('/highscores/1?sortType=1');
+    });
+
+    app.get('/highscores/:page', function(req, res) {
+      if (!req.param('sortType'))
+        res.redirect('/highscores/1?sortType=1');
+      var rank = req.params.page;
+        if (req.params.page > 1)
+          var rank = ((req.params.page-1)*10) + 1;
+      if (req.param('sortType')==1) {
+        User.find().sort({'stats.exp': -1}).limit(10).skip(rank-1).exec(function(err, users) {
+          if (users.length==0)
+            res.redirect('/highscores/1?sortType=1');
+          res.render('highscores.ejs', {
+              users : users,
+              rank  : rank,
+              sortType : req.param('sortType'),
+              page  : parseInt(req.params.page)
+          });
+        });
+      } else if (req.param('sortType')==2) {
+        User.find().sort({'stats.maxGold': -1}).limit(10).skip(rank-1).exec(function(err, users) {
+          if (users.length==0)
+            res.redirect('/highscores/1?sortType=1');
+          res.render('highscores.ejs', {
+              users : users,
+              rank  : rank,
+              sortType : req.param('sortType'),
+              page  : parseInt(req.params.page)
+          });
+        });
+      } else {
+        res.redirect('/highscores/1?sortType=1');
       }
     });
 };

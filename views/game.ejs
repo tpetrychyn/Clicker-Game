@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-      <title>Runescape Auto Miner</title>
+      <title>Runescape Miner v1</title>
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
       <link rel="stylesheet" href="./stylesheet/style.css">
@@ -14,8 +14,18 @@
   </head>
   <body>
     <div id="wrapper">
-      <strong>Welcome to Runescape Auto Miner</strong>: <%= user.local.email %><br>
-      <h2 onclick="mute()">Mute</h2> <h2 onclick="toggleShop()">Shop</h2>
+      <strong>Welcome to Runescape Miner</strong>: <%= user.local.email %><br>
+      <div class="row">
+        <div class="col-md-3">
+          <h2 onclick="mute()">Mute</h2>
+        </div>
+        <div class="col-md-3">
+          <h2 onclick="toggleShop()">Shop</h2>
+        </div>
+        <div class="col-md-3">
+          <h2><a href="/highscores">Highscores</a></h2>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-5">
           <% include clickArea %>

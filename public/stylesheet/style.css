@@ -2,6 +2,7 @@
   padding-left: 300px;
 }
 
+
 .rockicons:hover {
   -moz-transform:scale(1.2);
    -webkit-transform:scale(1.2);
@@ -60,7 +61,7 @@
 #inventory {
   clear: both;
   width: 340px;
-  height: 500px;
+  height: 528px;
   background-image: url("../images/inventory_back.png");
   background-size: cover;
   padding-left: 50px;

@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../stylesheet/highscores.css">
+    <title>Runescape Miner Highscores</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <div id="highscorebody">
+            <img width="100%" src="../images/highscores/scroll_top.gif"/>
+            <div id="highscoreinner">
+              <div class="row">
+                <div class="col-md-12">
+                  <%if (sortType==1) {%>
+                    <h3>Experience Highscores</h3>
+                  <%} else if (sortType==2) {%>
+                    <h3>Gold Earned Highscores</h3>
+                  <%}%>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <b>Rank:</b>
+                </div>
+                <div class="col-md-2">
+                  <b>Username:</b>
+                </div>
+                <div class="col-md-2">
+                  <b>Level:</b>
+                </div>
+                <div class="col-md-2">
+                  <a href="/highscores/1?sortType=1"><b>Experience:</b></a>
+                </div>
+                <div class="col-md-2">
+                  <a href="/highscores/1?sortType=2"><b>Gold Earned:</b></a>
+                </div>
+              </div>
+              <% users.forEach(function(user) { %>
+                <div class="row user">
+                  <div class="col-md-2">
+                    <%=rank%><%rank++%>
+                  </div>
+                  <div class="col-md-2">
+                    <%=user.local.email%>
+                  </div>
+                  <div class="col-md-2">
+                    <%=user.stats.level%>
+                  </div>
+                  <div class="col-md-2">
+                    <%=user.stats.exp%>
+                  </div>
+                  <div class="col-md-2">
+                    <%=user.stats.maxGold%>
+                  </div>
+                </div>
+
+              <%});%>
+              <div class="col-md-5" style="text-align: center">
+                <%if (page>1) {%>
+                  <a href="/highscores/<%=page-1%>?sortType=<%=sortType%>"><img width="30px" src="../images/highscores/arrow.png"/></a>
+                <%}%>
+              </div>
+              <div class="col-md-5" style="text-align: center">
+                  <a href="/highscores/<%=page+1%>?sortType=<%=sortType%>"><img width="30px" src="../images/highscores/arrowRight.png"/></a>
+              </div>
+            </div>
+            <img width="100%" src="../images/highscores/scroll_bottom.gif"/>
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+body {
+  padding-left: 0px;
+  background-image: url('../images/background.jpg');
+}
+
+.user {
+}
+
+#highscorebody {
+  background-image: url('../images/highscores/scroll_middle.gif');
+  background-size: cover;
+  height: inherit;
+}
+
+#highscoreinner {
+  padding-left: 50px;
+}
+
+#wrapper {
+  margin-top: 50px;
+}
