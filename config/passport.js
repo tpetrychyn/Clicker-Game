@@ -64,11 +64,13 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
-                newUser.stats.points = 0;
+                newUser.stats.gold = 0;
+                newUser.stats.maxGold = 0;
                 newUser.stats.level = 1;
                 newUser.stats.rocksUnlocked = 0;
                 newUser.stats.exp = 0;
-                newUser.stats.topPoints = 0;
+                newUser.stats.pickaxes = [0];
+                newUser.stats.pickEquipped = 0;
 
                 // save the user
                 newUser.save(function(err) {

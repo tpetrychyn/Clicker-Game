@@ -1,0 +1,21 @@
+<div id="pickaxes">
+<% for (x in pickTypes) {
+  var isOwned = 0;
+  for (i in user.stats.pickaxes) {
+    if (x==user.stats.pickaxes[i]) {
+      isOwned = 1;
+    }
+  }
+  if (isOwned == 1) {%>
+    <span id="pick_<%=pickTypes[x].id%>" onclick="choosePick(<%=pickTypes[x].id%>)">
+      <img class="pickicons" height="100px" src="./images/picks/<%=pickTypes[x].id%>.png"/><br>
+      </span>
+  <%} else {%>
+    <span class="lockedpick" id="pick_<%=pickTypes[x].id%>" onclick="doBuyPickaxe(<%=pickTypes[x].id%>)">
+      <img class="pickicons" height="50px" src="./images/picks/<%=pickTypes[x].id%>.png"/><br>
+    Cost: <%=  pickTypes[x].cost %><br></span>
+  <%}
+  isOwned = 0;
+}%>
+</div>
+<span id="clear"><br></span>

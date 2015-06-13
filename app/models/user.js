@@ -11,12 +11,13 @@ var userSchema = mongoose.Schema({
         password     : String,
     },
     stats            : {
-        points       : Number,
-        topPoints    : Number,
+        gold         : Number,
+        maxGold      : Number,
         level        : Number,
         exp          : Number,
-        clickUnlocks : Array,
         rocksUnlocked: Number,
+        pickaxes     : Array,
+        pickEquipped : Number
     }
 });
 

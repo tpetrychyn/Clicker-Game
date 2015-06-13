@@ -59,6 +59,20 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/game/listRocks', isLoggedIn, function(req, res) {
+        res.render('listRocks.ejs', {
+            user : req.user,
+            layout: false
+        });
+    });
+
+    app.get('/game/listPicks', isLoggedIn, function(req, res) {
+        res.render('pickaxes.ejs', {
+            user : req.user,
+            layout: false
+        });
+    });
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -66,39 +80,54 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
-    app.post('/game/save', isLoggedIn, function(req, res, next) {
-      req.user.stats.rocksUnlocked = req.param('rocks');
-      req.user.stats.points = req.param('points');
-      req.user.save(function(err) {
-          if (err)
-              throw err;
-          res.send('');
-      });
-    });
 
     app.get('/game/buyPickaxe', isLoggedIn, function(req, res, next) {
       var user = req.user;
-      var points = user.stats.points;
+      var gold = user.stats.gold;
       var id = req.param('id');
-      if (points >= getPickaxeCost(id)) {
-        user.stats.points -= getPickaxeCost(id);
+      var owned = false;
+      if (user.stats.pickaxes.indexOf(id) >= 0) {
+          owned = true;
+      }
+      if (!owned && gold >= getPickaxeCost(id)) {
+        user.stats.gold -= getPickaxeCost(id);
+        user.stats.pickaxes.push(id);
+        user.stats.pickaxes.sort();
       }
       req.user.save(function(err) {
           if (err)
               throw err;
-          res.send(user.stats.points + "");
+          res.send(user.stats.gold + "");
       });
     });
 
     function getPickaxeCost(id) {
-      return game.clickerUpgrades[id].cost;
+      return game.pickTypes[id].cost;
     }
+
+    app.get('/game/choosePick', isLoggedIn, function(req, res, next) {
+      var user = req.user;
+      var id = req.param('id');
+      var owned = false;
+      if (user.stats.pickaxes.indexOf(id) >= 0) {
+          owned = true;
+      }
+      if (owned) {
+          req.user.save(function(err) {
+              if (err)
+                  throw err;
+              res.send(req.param('id'));
+          });
+      } else {
+        res.send('notunlocked');
+      }
+    });
 
     app.get('/game/chooseRock', isLoggedIn, function(req, res, next) {
       var user = req.user;
       var urocks = user.stats.rocksUnlocked;
       var id = req.param('id');
-      if (0 <= game.rockTypes[id].required) {
+      if (user.stats.level >= game.rockTypes[id].required) {
           req.user.save(function(err) {
               if (err)
                   throw err;
@@ -113,31 +142,50 @@ module.exports = function(app, passport) {
       var user = req.user;
       var urocks = user.stats.rocksUnlocked;
       var id = req.param('id');
-      if (id <= urocks) {
-        user.stats.exp += game.rockTypes[id].exp;
-          req.user.save(function(err) {
-              if (err)
-                  throw err;
-              res.send(req.param('id') + ' ' + user.stats.exp);
-          });
+      var pick = req.param('pick');
+      var level = req.param('level');
+      var levelFactor = (10-(0.1*level));
+      if (rockTypes[id].required <= user.stats.level && user.stats.level == level && user.stats.pickaxes.indexOf(pick) >= 0) {
+          var miningTime = rockTypes[id].mineTime + (Math.random() * levelFactor) - parseInt(pick+1);
+          if (miningTime < 1)
+            miningTime = (Math.random() * 2) + 1;
+          setTimeout(function() {
+              user.stats.exp += game.rockTypes[id].exp + 1000;
+              user.stats.gold += game.rockTypes[id].cost;
+                 req.user.save(function(err) {
+                     if (err)
+                         throw err;
+                     res.send(req.param('id') + ' ' + user.stats.exp);
+                 });
+          }, miningTime * 1000);
       } else {
         res.send('notunlocked');
       }
     });
 
+    function expForLevel(theLevel) {
+        var a = 0;
+        for (x=1;x<theLevel;x++) {
+            a += Math.floor((x + 300 * Math.pow(2, (x/7.)))/4);
+        }
+        return a;
+    }
+
     app.get('/game/levelup', isLoggedIn, function(req, res, next) {
       var user = req.user;
       var id = req.param('id');
       var level = user.stats.level;
-      console.log(user.stats.exp);
-      console.log(user.stats.level + 300 * Math.pow(2,level/7));
-      console.log(user.stats.level);
-      if (user.stats.exp >= Math.floor(user.stats.level-1 + 300 * Math.pow(2,level-1/7.)) + Math.floor(user.stats.level + 300 * Math.pow(2,level/7.))) {
+      if (user.stats.exp >= user.stats.level+1) {
         user.stats.level++;
+        for (i in game.rockTypes) {
+            if (user.stats.level == game.rockTypes[i].required) {
+                user.stats.rocksUnlocked = i;
+            }
+        }
         req.user.save(function(err) {
               if (err)
                   throw err;
-              res.send(user.stats.level + '');
+              res.send(user.stats.level + ' ' + user.stats.rocksUnlocked);
           });
       } else {
         res.send('notunlocked');

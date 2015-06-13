@@ -5,11 +5,6 @@
    transform:scale(1.2);
 }
 
-.lockedrock {
-  opacity: 0.4;
-  filter: alpha(opacity=40); /* msie */
-}
-
 [id^="rock_"] {
   float: left;
   padding-right: 10px;
@@ -21,11 +16,39 @@
   width: 400px;
 }
 
+.rocksLocked {
+    opacity: 0.5;
+}
+
 #pickarea {
   width: 200px;
   float: left;
   display: block;
   visibility: hidden;
+}
+
+[id^="pick_"] {
+  float: left;
+  padding-right: 10px;
+}
+
+#pickaxes {
+  clear: both;
+}
+
+#rockslist {
+  clear:both;
+}
+
+.lockedpick {
+  opacity: 0.5;
+}
+
+.pickicons:hover {
+  -moz-transform:scale(1.2);
+   -webkit-transform:scale(1.2);
+   -o-transform:scale(1.2);
+   transform:scale(1.2);
 }
 
 @-ms-keyframes wiggle{0%{-ms-transform:rotate(20deg);}50%{-ms-transform:rotate(-6deg);}100%{-ms-transform:rotate(6deg);}}

@@ -16,28 +16,33 @@ function clickUpgrade(id, name, cost, description, unlocked, owned, classId, con
 }
 
 rockTypes = [
-    //name, cost, owned, description, unlocked
-    new rockType(0, "Copper", 30, 35, "Requires level 1 to mine", 1),
-    new rockType(1, "Tin", 30, 35, "Requires level 1 to mine", 1),
-    new rockType(2, "Iron", 30, 70, "Requires level 1 to mine", 15),
-    new rockType(3, "Coal", 30, 100, "Requires level 1 to mine", 30)
+    //id, name, cost, exp, description, required, baseTime
+    new rockType(0, "Copper", 30, 35, "Requires level 1 to mine", 1, 2),
+    new rockType(1, "Tin", 30, 35, "Requires level 1 to mine", 2, 2),
+    new rockType(2, "Iron", 55, 70, "Requires level 15 to mine", 15, 3),
+    new rockType(3, "Coal", 80, 100, "Requires level 30 to mine", 30, 5),
+    new rockType(4, "Gold", 100, 100, "Requires level 40 to mine", 40, 5)
   ];
 
 //allows nodeJS to access it
 exports.rockTypes = rockTypes;
 
-function rockType(id, name, cost, exp, description, required) {
+function rockType(id, name, cost, exp, description, required, mineTime) {
   this.id = id;
   this.name = name;
   this.cost = cost;
   this.exp = exp;
   this.description = description;
   this.required = required;
+  this.mineTime = mineTime;
 }
 
 pickTypes = [
-    //name, cost, owned, description, unlocked
-    new rockType(0, "Bronze", 30, 1, "Requires level 1 to wear")
+    //id, name, cost, level, description
+    new pickType(0, "Bronze", 1, 1, "Requires level 1 to wear"),
+    new pickType(1, "Iron", 100, 1, "Requires level 1 to wear"),
+    new pickType(2, "Steel", 500, 5, "Requires level 5 to wear"),
+    new pickType(3, "Mithril", 2100, 20, "Requires level 20 to wear")
   ];
 
 //allows nodeJS to access it
